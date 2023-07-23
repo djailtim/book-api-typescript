@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import 'express-async-errors';
 
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 
 import './database'; // Usar para banco de dados sqlite3
@@ -13,7 +13,18 @@ import { AppError } from './shared/errors/AppError';
 // createConnection(); // Usar para banco de dados postgres
 const app = express();
 
-app.use(cors());
+/** Cors cors()*/
+app.use((
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  app.use(cors());
+  next();
+});
+
 app.use(express.json());
 
 app.use('/api/v1', router);
