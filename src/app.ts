@@ -14,16 +14,7 @@ import { AppError } from './shared/errors/AppError';
 const app = express();
 
 /** Cors cors()*/
-app.use((
-  request: Request,
-  response: Response,
-  next: NextFunction
-) => {
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  app.use(cors());
-  next();
-});
+app.use(cors());
 
 app.use(express.json());
 
