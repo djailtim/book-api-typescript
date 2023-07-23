@@ -5,7 +5,7 @@ import { CreateBookUseCase } from "./CreateBookUseCase";
 export class CreateBookController {
     async execute(request: Request, response: Response) {
         const { id: user_id } = request.user;
-        const { category_id, title, pages, status } = request.body;
+        const { category_id, title, author, status } = request.body;
 
         const createBook = container.resolve(CreateBookUseCase);
 
@@ -13,7 +13,7 @@ export class CreateBookController {
             user_id,
             category_id,
             title,
-            pages,
+            author,
             status
         });
 

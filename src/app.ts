@@ -4,13 +4,13 @@ import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
 
-import './database';
-// import createConnection from "./database"
+import './database'; // Usar para banco de dados sqlite3
+// import createConnection from "./database" // Usar para banco de dados postgres
 import './shared/container';
 import { router } from './routes';
 import { AppError } from './shared/errors/AppError';
 
-// createConnection();
+// createConnection(); // Usar para banco de dados postgres
 const app = express();
 
 app.use(cors());

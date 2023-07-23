@@ -7,9 +7,7 @@ export class GetCategoryController {
         const { id } = request.params;
 
         const getCategory = container.resolve(GetCategoryUseCase);
-
         const category = await getCategory.execute(id);
-
         return response.json(category);
     }
 }

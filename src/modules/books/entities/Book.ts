@@ -9,24 +9,24 @@ export class Book {
     @PrimaryGeneratedColumn("uuid")
     id?: string;
 
-    @Column("uuid")
-    user_id: string;
     @ManyToOne(() => User, (user) => user.book)
     @JoinColumn({ name: "user_id" })
     user: User;
-
     @Column("uuid")
-    category_id: string;
+    user_id: string;
+
     @ManyToOne(() => Category, (category) => category.book)
     @JoinColumn({ name: "category_id" })
     category: Category;
+    @Column("uuid")
+    category_id: string;
 
     @Column()
     title: string;
-    
+
     @Column()
-    pages: number;
-    
+    author: string;
+
     @Column()
     status: string;
 

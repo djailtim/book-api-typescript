@@ -2,6 +2,7 @@ import { Repository, getRepository } from "typeorm";
 import { Book } from "../entities/Book";
 import { ICreateBookDTO } from "../useCases/createBook/ICreateBookDTO";
 import { IBooksRepository } from "./IBooksRepository";
+import { BookDoesNotBelongUserError } from "../useCases/bookError/BookDoesNotBelongUserError";
 
 export class BooksRepository implements IBooksRepository {
 
@@ -15,31 +16,43 @@ export class BooksRepository implements IBooksRepository {
         user_id,
         category_id,
         title,
-        pages,
+        author,
         status
     }: ICreateBookDTO): Promise<Book> {
         const book = this.repository.create({
             user_id,
             category_id,
             title,
-            pages,
+            author,
             status
         });
 
-        await this.repository.save(book);
-
-        return book;
+        return this.repository.save(book);
     };
 
-    async findById(id: string): Promise<Book | undefined> {
-        const book = await this.repository.findOne(id);
-        return book;
+    async findById(book_id: string): Promise<Book | undefined> {
+      const book = await this.repository.findOne(book_id);
+      return book;
+  }
+
+    async listAll(user_id: string): Promise<Book[]> {
+      const books = await this.repository
+        .createQueryBuilder("b")
+        .where("b.user_id = :user_id", { user_id })
+        .getMany();
+
+      return books;
     };
 
-    async listAll(): Promise<Book[]> {
-        const books = await this.repository.find();
+    async getAllBooksByCategory(user_id: string, category_id: string): Promise<Book[]> {
+        const books = await this.repository
+          .createQueryBuilder("b")
+          .where("b.user_id = :user_id", { user_id })
+          .andWhere("b.category_id = :category_id", { category_id })
+          .getMany();
+
         return books;
-    };
+    }
 
     async update(id: string, {
         user_id,

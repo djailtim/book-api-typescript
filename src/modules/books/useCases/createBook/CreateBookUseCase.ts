@@ -10,13 +10,13 @@ export class CreateBookUseCase {
         private booksRepository: IBooksRepository
     ) {}
 
-    async execute({ user_id, category_id, title, pages, status }: ICreateBookDTO) {
+    async execute({ user_id, category_id, title, author, status }: ICreateBookDTO) {
 
         const book = await this.booksRepository.create({
             user_id,
             category_id,
             title,
-            pages,
+            author,
             status
         });
 

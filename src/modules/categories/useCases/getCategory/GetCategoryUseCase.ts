@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
-import { GetCategoryError } from "./GetCategoryError";
+import { CategoryNotFoundError } from "../categoryError/CategoryNotFoundError";
 
 @injectable()
 export class GetCategoryUseCase {
@@ -13,7 +13,7 @@ export class GetCategoryUseCase {
         const category = await this.categoriesRepository.findById(id);
 
         if(!category) {
-            throw new GetCategoryError();
+            throw new CategoryNotFoundError();
         }
 
         return category;

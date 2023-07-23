@@ -24,8 +24,8 @@ export class booksTable1689904376833 implements MigrationInterface {
                     type: 'varchar'
                 },
                 {
-                    name: 'pages',
-                    type: 'decimal'
+                    name: 'author',
+                    type: 'varchar'
                 },
                 {
                     name: 'status',
@@ -34,7 +34,7 @@ export class booksTable1689904376833 implements MigrationInterface {
             ],
             foreignKeys: [
                 {
-                    name: 'books',
+                    name: 'FKUserBook',
                     columnNames: ['user_id'],
                     referencedTableName: 'users',
                     referencedColumnNames: ['id'],
@@ -42,9 +42,9 @@ export class booksTable1689904376833 implements MigrationInterface {
                     onDelete: 'CASCADE'
                 },
                 {
-                    name: 'books',
+                    name: 'FKCategoryBook',
                     columnNames: ['category_id'],
-                    referencedTableName: 'category',
+                    referencedTableName: 'categories',
                     referencedColumnNames: ['id'],
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
