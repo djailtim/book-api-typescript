@@ -58,7 +58,7 @@ export class BooksRepository implements IBooksRepository {
         user_id,
         category_id,
         title,
-        pages,
+        author,
         status
     }: ICreateBookDTO): Promise<void> {
         await this.repository
@@ -68,7 +68,7 @@ export class BooksRepository implements IBooksRepository {
                 user_id,
                 category_id,
                 title,
-                pages,
+                author,
                 status
             })
             .where("id = :id")
